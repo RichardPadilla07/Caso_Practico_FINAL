@@ -108,8 +108,8 @@ async function cargarProductos() {
         <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0,10) : ''}</td>
         <td>${prod.proveedor || ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
-          <button onclick="editarProducto(${prod.id})">✏️</button>
-          <button onclick="eliminarProducto(${prod.id})">🗑️</button>
+          <button onclick="editarProducto('${prod._id}')">✏️</button>
+          <button onclick="eliminarProducto('${prod._id}')">🗑️</button>
         </td>
       `;
       tbody.appendChild(tr);
