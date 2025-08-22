@@ -47,7 +47,7 @@ export const create = async (req, res) => {
     const producto = await Producto.findOne({ codigo: codigo_producto });
     if (!producto) return res.status(400).json({ error: 'Código de producto no existe' });
     if (cantidad > producto.stock) return res.status(400).json({ error: 'Cantidad supera el stock disponible' });
-    const pedido = new Pedido({ codigo_pedido, cedula_cliente, codigo_producto, cantidad });
+    const pedido = new Pedido({ codigo_pedido, cedula_cliente, codigo_producto, cantidad, estado: 'pendiente' });
     await pedido.save();
     res.json(pedido);
   } catch (err) {

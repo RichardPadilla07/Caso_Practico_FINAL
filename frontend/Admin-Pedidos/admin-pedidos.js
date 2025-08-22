@@ -31,11 +31,11 @@ function mostrarPedidos(pedidos) {
       <div style="margin-bottom:8px;color:#444;">Cliente: <strong>${pedido.cedula_cliente ?? ''}</strong></div>
       <div style="margin-bottom:8px;color:#444;">Producto: <strong>${pedido.codigo_producto ?? ''}</strong></div>
       <div style="margin-bottom:8px;color:#444;">Cantidad: <strong>${pedido.cantidad ?? ''}</strong></div>
-      <div style="margin-bottom:8px;color:#444;">Estado: <span id="estado-${pedido.id}" style="font-weight:bold;">${pedido.estado || 'pendiente'}</span></div>
+      <div style="margin-bottom:8px;color:#444;">Estado: <span id="estado-${pedido._id}" style="font-weight:bold;">${pedido.estado || 'pendiente'}</span></div>
       <div style="display:flex;gap:10px;">
-        <button style='background:#2575fc;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido(${pedido.id})'>Aceptar</button>
-        <button style='background:#ff9800;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido(${pedido.id}, "rechazado")'>Rechazar</button>
-        <button style='background:#d32f2f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='eliminarPedido(${pedido.id})'>Eliminar</button>
+        <button style='background:#2575fc;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "aceptado")'>Aceptar</button>
+        <button style='background:#ff9800;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "no disponible")'>Rechazar</button>
+        <button style='background:#d32f2f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "eliminado")'>Eliminar</button>
       </div>
     `;
     container.appendChild(card);

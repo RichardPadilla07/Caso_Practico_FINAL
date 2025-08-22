@@ -103,7 +103,7 @@ function renderPedidosTabla(pedidos) {
   pedidos.forEach(ped => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-  <td>${ped._id}</td>
+      <td>${ped._id}</td>
       <td>${ped.codigo_pedido || ''}</td>
       <td>${ped.cedula_cliente}</td>
       <td>${ped.codigo_producto || ''}</td>
@@ -112,6 +112,7 @@ function renderPedidosTabla(pedidos) {
       <td>${ped.categoria || ''}</td>
       <td>${ped.precio || ''}</td>
       <td>${ped.stock || ''}</td>
+      <td>${ped.estado || 'pendiente'}</td>
     `;
     tbody.appendChild(tr);
   });

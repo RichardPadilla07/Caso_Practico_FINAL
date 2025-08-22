@@ -8,7 +8,8 @@ const pedidoSchema = new mongoose.Schema({
   codigo_pedido: { type: Number, required: true, unique: true },
   cedula_cliente: { type: Number, required: true },
   codigo_producto: { type: String, required: true, maxlength: 20 },
-  cantidad: { type: Number, required: true, default: 1 }
+  cantidad: { type: Number, required: true, default: 1 },
+  estado: { type: String, enum: ['pendiente', 'aceptado', 'no disponible', 'eliminado'], default: 'pendiente' }
 });
 
 const Pedido = mongoose.model("Pedido", pedidoSchema);
