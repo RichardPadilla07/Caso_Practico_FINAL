@@ -71,13 +71,13 @@ async function crearPedido(e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(pedido)
     });
-  if (!res.ok) throw new Error('Error al crear pedido');
-  window.alert('¡Pedido creado exitosamente!');
-  // Restablecer formulario y ocultar producto buscado
-  document.getElementById('codigo_producto').value = '';
-  document.getElementById('cantidadProducto').value = 1;
-  document.getElementById('datosProducto').style.display = 'none';
-  mostrarPedidosCliente();
+    if (!res.ok) throw new Error('Error al crear pedido');
+    window.alert('¡Pedido creado exitosamente!');
+    // Restablecer formulario y ocultar producto buscado
+    document.getElementById('codigo_producto').value = '';
+    document.getElementById('cantidadProducto').value = 1;
+    document.getElementById('datosProducto').style.display = 'none';
+    mostrarPedidosCliente();
   } catch (err) {
     alert('Error al crear pedido');
   }
@@ -103,7 +103,7 @@ function renderPedidosTabla(pedidos) {
   pedidos.forEach(ped => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${ped.id}</td>
+  <td>${ped._id}</td>
       <td>${ped.codigo_pedido || ''}</td>
       <td>${ped.cedula_cliente}</td>
       <td>${ped.codigo_producto || ''}</td>

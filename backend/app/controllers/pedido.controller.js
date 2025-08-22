@@ -10,7 +10,18 @@ export const getByCliente = async (req, res) => {
   try {
     const { cedula } = req.params;
     const pedidos = await Pedido.find({ cedula_cliente: cedula });
-    res.json(pedidos);
+    // Para cada pedido, buscar el producto y agregar sus datos
+    const pedidosConProducto = await Promise.all(pedidos.map(async (pedido) => {
+      const producto = await Producto.findOne({ codigo: pedido.codigo_producto });
+      return {
+        ...pedido.toObject(),
+        nombre: producto ? producto.nombre : '',
+        categoria: producto ? producto.categoria : '',
+        precio: producto ? producto.precio : '',
+        stock: producto ? producto.stock : ''
+      };
+    }));
+    res.json(pedidosConProducto);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

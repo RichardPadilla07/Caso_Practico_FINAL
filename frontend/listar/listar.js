@@ -36,7 +36,7 @@ function renderProductosTabla(productos) {
       <td>${prod.stock}</td>
       <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : ''}</td>
       <td>${prod.proveedor}</td>
-      <td><button class="btn-login" onclick="agregarAlCarrito('${prod.id}')">Agregar al carrito</button></td>
+  <td><button class="btn-login" onclick="agregarAlCarrito('${prod._id}')">Agregar al carrito</button></td>
     `;
     tbody.appendChild(tr);
   });
