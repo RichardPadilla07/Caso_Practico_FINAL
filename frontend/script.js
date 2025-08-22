@@ -1,4 +1,4 @@
-// Utilidades para mostrar/ocultar formularios
+// Utilidades para mostrar/ocultar formularios.
 function hideAllForms() {
   document.getElementById('admin-login').classList.add('hidden');
   document.getElementById('admin-register').classList.add('hidden');
