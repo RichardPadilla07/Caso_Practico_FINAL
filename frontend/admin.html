@@ -359,13 +359,21 @@
               <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo producto.</p>
               <form id="form-producto" style="margin-bottom:20px;max-width:500px;">
                 <input type="text" name="nombre" placeholder="Nombre" required maxlength="20" class="input-login">
+                <span class="error-nombre" style="color:red;font-size:12px;"></span>
                 <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
+                <span class="error-codigo" style="color:red;font-size:12px;"></span>
                 <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
+                <span class="error-descripcion" style="color:red;font-size:12px;"></span>
                 <input type="text" name="categoria" placeholder="Categoría" maxlength="20" class="input-login">
+                <span class="error-categoria" style="color:red;font-size:12px;"></span>
                 <input type="number" name="precio" placeholder="Precio" step="0.01" required class="input-login">
+                <span class="error-precio" style="color:red;font-size:12px;"></span>
                 <input type="number" name="stock" placeholder="Stock" required class="input-login">
+                <span class="error-stock" style="color:red;font-size:12px;"></span>
                 <input type="date" name="fecha_ingreso" placeholder="Fecha ingreso" class="input-login">
+                <span class="error-fecha-ingreso" style="color:red;font-size:12px;"></span>
                 <input type="text" name="proveedor" placeholder="Proveedor" maxlength="20" class="input-login">
+                <span class="error-proveedor" style="color:red;font-size:12px;"></span>
                 <button type="submit" class="btn-login">Crear producto</button>
               </form>
             </div>
