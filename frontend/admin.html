@@ -372,35 +372,27 @@
             <div class="slide-crear" id="slide-crear-cliente" style="display:none;min-width:0;max-width:500px;">
               <h2 class="form-title">Crear cliente</h2>
               <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo cliente.</p>
-              <form id="form-cliente">
-                <input name="cedula" placeholder="Cédula" required>
-                <span class="error-cedula"></span>
-
-                <input name="nombre" placeholder="Nombre" required>
-                <span class="error-nombre"></span>
-
-                <input name="apellido" placeholder="Apellido" required>
-                <span class="error-apellido"></span>
-
-                <input name="ciudad" placeholder="Ciudad" required>
-                <span class="error-ciudad"></span>
-
-                <input name="email" placeholder="Email" required>
-                <span class="error-email"></span>
-
-                <input name="direccion" placeholder="Dirección">
-                <span class="error-direccion"></span>
-
-                <input name="telefono" placeholder="Teléfono">
-                <span class="error-telefono"></span>
-
-                <input name="fecha_nacimiento" placeholder="dd/mm/aaaa" required>
-                <span class="error-fecha_nacimiento"></span>
-
-                <input name="passwordCliente" placeholder="Contraseña" required type="password">
-                <span class="error-passwordCliente"></span>
-
-                <button type="submit">Crear cliente</button>
+              <form id="form-cliente" style="margin-bottom:20px;max-width:500px;">
+                <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
+                <span class="error-cedula" style="color:red;font-size:12px;"></span>
+                <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+                <span class="error-nombre" style="color:red;font-size:12px;"></span>
+                <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
+                <span class="error-apellido" style="color:red;font-size:12px;"></span>
+                <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
+                <span class="error-ciudad" style="color:red;font-size:12px;"></span>
+                <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
+                <span class="error-email" style="color:red;font-size:12px;"></span>
+                <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
+                <span class="error-direccion" style="color:red;font-size:12px;"></span>
+                <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
+                <span class="error-telefono" style="color:red;font-size:12px;"></span>
+                <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
+                <span class="error-fecha_nacimiento" style="color:red;font-size:12px;"></span>
+                <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30"
+                  class="input-login">
+                <span class="error-passwordCliente" style="color:red;font-size:12px;"></span>
+                <button type="submit" class="btn-login">Crear cliente</button>
               </form>
             </div>
           </div>
