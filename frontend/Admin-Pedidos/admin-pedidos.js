@@ -4,7 +4,7 @@
 
 
 // API para pedidos
-const API_PEDIDOS = 'http://localhost:3000/api/pedidos';
+const API_PEDIDOS = 'https://caso-practico-final.onrender.com/api/pedidos';
 
 async function obtenerPedidos() {
   try {

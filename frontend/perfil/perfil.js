@@ -67,7 +67,7 @@ async function obtenerDatosCliente() {
     const cedula = localStorage.getItem('cedulaCliente') || localStorage.getItem('clienteCedula');
     if (!cedula) return;
     try {
-        const res = await fetch(`http://localhost:3000/api/clientes/${cedula}`);
+        const res = await fetch(`https://caso-practico-final.onrender.com/api/clientes/${cedula}`);
         if (!res.ok) throw new Error('Error al obtener datos');
         const datosCliente = await res.json();
         renderPerfilCliente(datosCliente);
@@ -105,7 +105,7 @@ async function actualizarPerfil(e) {
         passwordCliente: form.password.value
     };
     try {
-        const res = await fetch(`http://localhost:3000/api/clientes/${cedula}`, {
+        const res = await fetch(`https://caso-practico-final.onrender.com/api/clientes/${cedula}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datos)

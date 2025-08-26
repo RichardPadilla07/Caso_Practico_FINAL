@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para pedidos
-const API_PEDIDOS_CREAR = 'http://localhost:3000/api/pedidos';
+const API_PEDIDOS_CREAR = 'https://caso-practico-final.onrender.com/api/pedidos';
 
 // Obtener y mostrar pedidos como tarjetas
 async function obtenerPedidos() {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', obtenerPedidos);
 
 
 // API para productos
-const API_URL = 'http://localhost:3000/api/productos';
+const API_URL = 'https://caso-practico-final.onrender.com/api/productos';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {

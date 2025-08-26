@@ -25,7 +25,7 @@ async function buscarProducto() {
   const codigo = document.getElementById('codigo_producto').value.trim();
   if (!codigo) return;
   try {
-    const res = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
+    const res = await fetch(`https://caso-practico-final.onrender.com/api/productos/codigo/${codigo}`);
     if (!res.ok) throw new Error('Producto no encontrado');
     const producto = await res.json();
     mostrarDatosProducto(producto);
@@ -55,7 +55,7 @@ async function crearPedido(e) {
   const cantidad = document.getElementById('cantidadProducto').value;
   try {
     // Obtener producto para el código
-    const resProd = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
+    const resProd = await fetch(`https://caso-practico-final.onrender.com/api/productos/codigo/${codigo}`);
     if (!resProd.ok) throw new Error('Producto no encontrado');
     const producto = await resProd.json();
     // Generar un código de pedido único como número
@@ -66,7 +66,7 @@ async function crearPedido(e) {
       codigo_producto: producto.codigo,
       cantidad: cantidad
     };
-    const res = await fetch('http://localhost:3000/api/pedidos', {
+    const res = await fetch('https://caso-practico-final.onrender.com/api/pedidos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(pedido)
@@ -87,7 +87,7 @@ async function crearPedido(e) {
 async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
-    const res = await fetch(`http://localhost:3000/api/pedidos/cliente/${cedula}`);
+    const res = await fetch(`https://caso-practico-final.onrender.com/api/pedidos/cliente/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener pedidos');
     const pedidos = await res.json();
     renderPedidosTabla(pedidos);

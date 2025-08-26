@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para clientes
-const API_CLIENTES = 'http://localhost:3000/api/clientes';
+const API_CLIENTES = 'https://caso-practico-final.onrender.com/api/clientes';
 
 // Cargar clientes
 async function cargarClientes() {

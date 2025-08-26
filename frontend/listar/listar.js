@@ -7,7 +7,7 @@ async function agregarAlCarrito(idProducto) {
   const cedula = localStorage.getItem('cedulaCliente') || localStorage.getItem('clienteCedula');
   if (!cedula) return alert('No se encontró la cédula del cliente');
   try {
-    const res = await fetch('http://localhost:3000/api/carrito', {
+    const res = await fetch('https://caso-practico-final.onrender.com/api/carrito', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula_cliente: cedula, id_producto: idProducto, cantidad: 1 })
@@ -46,7 +46,7 @@ function renderProductosTabla(productos) {
 // Obtener productos del backend y renderizar tabla
 async function obtenerYListarProductos() {
   try {
-    const res = await fetch('http://localhost:3000/api/productos');
+    const res = await fetch('https://caso-practico-final.onrender.com/api/productos');
     if (!res.ok) throw new Error('Error al obtener productos');
     const productos = await res.json();
     renderProductosTabla(productos);
