@@ -4,7 +4,7 @@
 
 // Importar las dependencias necesarias
 import { Router } from 'express';
-import { getAll, getById, create, update, remove } from '../controllers/usuario.controller.js';
+import { getAll, getById, create, update, remove, loginUsuario } from '../controllers/usuario.controller.js';
 
 const router = Router();
 
@@ -13,5 +13,6 @@ router.get('/:id', getById);
 router.post('/', create);
 router.put('/:id', update);
 router.delete('/:id', remove);
+router.post('/login', loginUsuario);
 
 export default router;

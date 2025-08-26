@@ -53,18 +53,18 @@ async function handleAdminLogin(e) {
   }
   // Petición al backend
   try {
-    const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
-      method: 'GET'
+    const res = await fetch(`${BACKEND_URL}/api/usuarios/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
     });
-    const usuarios = await res.json();
-          const user = usuarios.find(u => u.email.trim().toLowerCase() === email.trim().toLowerCase() && u.password === password);
-    if (user) {
+    const data = await res.json();
+    if (res.ok && data.rol === 'admin') {
       showNotification('admin-login-notif', 'Login exitoso. Redirigiendo...', 'success');
-      // Guardar el _id real del usuario admin en localStorage
-      localStorage.setItem('adminId', user._id);
+      localStorage.setItem('adminId', data._id);
       setTimeout(() => { window.location.href = 'admin.html'; }, 1500);
     } else {
-      showNotification('admin-login-notif', 'Credenciales incorrectas.', 'error');
+      showNotification('admin-login-notif', data.error || 'Credenciales incorrectas.', 'error');
     }
   } catch (err) {
     showNotification('admin-login-notif', 'Error de conexión.', 'error');
@@ -109,17 +109,18 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-    const res = await fetch(`${BACKEND_URL}/api/clientes`, {
-      method: 'GET'
+    const res = await fetch(`${BACKEND_URL}/api/clientes/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cedula, passwordCliente })
     });
-    const clientes = await res.json();
-          const cliente = clientes.find(c => c.cedula === cedula && c.passwordCliente === passwordCliente);
-    if (cliente) {
+    const data = await res.json();
+    if (res.ok && data.rol === 'cliente') {
       showNotification('cliente-login-notif', 'Login exitoso. Redirigiendo...', 'success');
-      localStorage.setItem('cedulaCliente', cliente.cedula);
+      localStorage.setItem('cedulaCliente', data.cedula);
       setTimeout(() => { window.location.href = 'cliente.html'; }, 1500);
     } else {
-      showNotification('cliente-login-notif', 'Credenciales incorrectas.', 'error');
+      showNotification('cliente-login-notif', data.error || 'Credenciales incorrectas.', 'error');
     }
   } catch (err) {
     showNotification('cliente-login-notif', 'Error de conexión.', 'error');
