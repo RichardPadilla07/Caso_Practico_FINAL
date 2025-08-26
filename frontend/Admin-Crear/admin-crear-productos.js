@@ -75,34 +75,8 @@ window.eliminarPedido = async function (id) {
 document.addEventListener('DOMContentLoaded', obtenerPedidos);
 
 
-
-
-
 // API para productos
-import { z } from "zod";
 const API_URL = 'https://caso-practico-final.onrender.com/api/productos';
-
-// Esquema de validación Zod para producto
-const productoSchema = z.object({
-  nombre: z.string()
-    .min(2, 'Nombre requerido')
-    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'El nombre solo debe contener letras'),
-  codigo: z.string()
-    .min(2, 'Código requerido')
-    .regex(/^\d+$/, 'El código solo debe contener números'),
-  descripcion: z.string()
-    .min(2, 'Descripción requerida')
-    .regex(/^[^\d]*$/, 'La descripción no debe contener números'),
-  categoria: z.string()
-    .min(2, 'Categoría requerida')
-    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'La categoría solo debe contener letras'),
-  precio: z.number().min(0, 'El precio debe ser un número positivo'),
-  stock: z.number().int().min(0, 'El stock debe ser un número entero positivo'),
-  fecha_ingreso: z.string().min(8, 'Fecha requerida'),
-  proveedor: z.string()
-    .min(2, 'Proveedor requerido')
-    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'El proveedor solo debe contener letras')
-});
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
