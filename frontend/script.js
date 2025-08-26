@@ -6,26 +6,33 @@ function hideAllForms() {
   document.getElementById('cliente-login').classList.add('hidden');
   document.getElementById('cliente-register').classList.add('hidden');
 }
+
 function showAdminLogin() {
   hideAllForms();
   document.getElementById('role-select').style.display = 'none';
   document.getElementById('admin-login').classList.remove('hidden');
 }
 window.showAdminLogin = showAdminLogin;
+
 function showAdminRegister() {
   hideAllForms();
   document.getElementById('admin-register').classList.remove('hidden');
 }
+window.showAdminRegister = showAdminRegister;
+
 function showClienteLogin() {
   hideAllForms();
   document.getElementById('role-select').style.display = 'none';
   document.getElementById('cliente-login').classList.remove('hidden');
 }
 window.showClienteLogin = showClienteLogin;
+
 function showClienteRegister() {
   hideAllForms();
   document.getElementById('cliente-register').classList.remove('hidden');
 }
+window.showClienteRegister = showClienteRegister;
+
 // Notificaciones
 function showNotification(id, message, type) {
   const notif = document.getElementById(id);
@@ -46,7 +53,7 @@ async function handleAdminLogin(e) {
   }
   // Petición al backend
   try {
-  const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
+    const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
       method: 'GET'
     });
     const usuarios = await res.json();
@@ -75,7 +82,7 @@ async function handleAdminRegister(e) {
     return false;
   }
   try {
-  const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
+    const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, apellido, email, password })
@@ -101,7 +108,7 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-  const res = await fetch(`${BACKEND_URL}/api/clientes`, {
+    const res = await fetch(`${BACKEND_URL}/api/clientes`, {
       method: 'GET'
     });
     const clientes = await res.json();
@@ -134,7 +141,7 @@ async function handleClienteRegister(e) {
     return false;
   }
   try {
-  const res = await fetch(`${BACKEND_URL}/api/clientes`, {
+    const res = await fetch(`${BACKEND_URL}/api/clientes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente })
@@ -148,7 +155,7 @@ async function handleClienteRegister(e) {
         const data = await res.json();
         if (typeof data.error === 'string') errorMsg = data.error;
         else if (typeof data.error === 'object' && data.error.message) errorMsg = data.error.message;
-      } catch (e) {}
+      } catch (e) { }
       showNotification('cliente-register-notif', errorMsg, 'error');
     }
   } catch (err) {
