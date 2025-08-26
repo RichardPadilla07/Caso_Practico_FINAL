@@ -24,7 +24,7 @@ async function cargarClientes() {
         <td>${cli.email}</td>
         <td>${cli.direccion || ''}</td>
         <td>${cli.telefono || ''}</td>
-        <td>${cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0, 10) : ''}</td>
+        <td>${cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0,10) : ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
           <button onclick="editarCliente('${cli.cedula}')">✏️</button>
           <button onclick="eliminarCliente('${cli.cedula}')">🗑️</button>
@@ -41,12 +41,6 @@ async function cargarClientes() {
 async function handleCrearCliente(e) {
   e.preventDefault();
   const form = e.target;
-  // Limpiar errores previos
-  const fields = ['cedula', 'nombre', 'apellido', 'ciudad', 'email', 'direccion', 'telefono', 'fecha_nacimiento', 'passwordCliente'];
-  fields.forEach(f => {
-    const errSpan = form.querySelector(`.error-${f}`);
-    if (errSpan) errSpan.textContent = '';
-  });
   const cliente = {
     cedula: form.cedula.value.trim(),
     nombre: form.nombre.value.trim(),
@@ -58,7 +52,6 @@ async function handleCrearCliente(e) {
     fecha_nacimiento: form.fecha_nacimiento.value,
     passwordCliente: form.passwordCliente.value.trim()
   };
-
   try {
     const res = await fetch(API_CLIENTES, {
       method: 'POST',
@@ -67,8 +60,8 @@ async function handleCrearCliente(e) {
     });
     if (res.ok) {
       form.reset();
-      alert('Cliente creado correctamente');
-      cargarClientes();
+  alert('Cliente creado correctamente');
+  cargarClientes();
     } else {
       const data = await res.json();
       alert(data.error || 'Error al crear cliente');
@@ -79,7 +72,7 @@ async function handleCrearCliente(e) {
 }
 
 // Eliminar cliente
-window.eliminarCliente = async function (cedula) {
+window.eliminarCliente = async function(cedula) {
   if (!confirm('¿Seguro que deseas eliminar este cliente?')) return;
   try {
     const res = await fetch(`${API_CLIENTES}/${cedula}`, { method: 'DELETE' });
@@ -91,7 +84,7 @@ window.eliminarCliente = async function (cedula) {
 }
 
 // Editar cliente
-window.editarCliente = async function (cedula) {
+window.editarCliente = async function(cedula) {
   try {
     const res = await fetch(`${API_CLIENTES}/${cedula}`);
     if (!res.ok) return alert('No se pudo obtener el cliente');
@@ -105,10 +98,10 @@ window.editarCliente = async function (cedula) {
     form.email.value = cli.email || '';
     form.direccion.value = cli.direccion || '';
     form.telefono.value = cli.telefono || '';
-    form.fecha_nacimiento.value = cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0, 10) : '';
+    form.fecha_nacimiento.value = cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0,10) : '';
     form.passwordCliente.value = cli.passwordCliente || '';
     modal.style.display = 'flex';
-    form.onsubmit = async function (e) {
+    form.onsubmit = async function(e) {
       e.preventDefault();
       const datos = {
         cedula: form.cedula.value.trim(),

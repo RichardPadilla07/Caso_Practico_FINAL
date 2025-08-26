@@ -8,7 +8,7 @@ const API_PEDIDOS_CREAR = 'https://caso-practico-final.onrender.com/api/pedidos'
 // Obtener y mostrar pedidos como tarjetas
 async function obtenerPedidos() {
   try {
-    const res = await fetch(API_PEDIDOS_CREAR);
+  const res = await fetch(API_PEDIDOS_CREAR);
     const pedidos = await res.json();
     mostrarPedidos(pedidos);
   } catch (error) {
@@ -41,9 +41,9 @@ function mostrarPedidos(pedidos) {
 }
 
 // Cambiar estado de un pedido
-window.cambiarEstadoPedido = async function (id, nuevoEstado) {
+window.cambiarEstadoPedido = async function(id, nuevoEstado) {
   try {
-    const res = await fetch(`${API_PEDIDOS_CREAR}/${id}`, {
+  const res = await fetch(`${API_PEDIDOS_CREAR}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ estado: nuevoEstado })
@@ -57,10 +57,10 @@ window.cambiarEstadoPedido = async function (id, nuevoEstado) {
 }
 
 // Eliminar pedido
-window.eliminarPedido = async function (id) {
+window.eliminarPedido = async function(id) {
   if (!confirm('¿Seguro que deseas eliminar este pedido?')) return;
   try {
-    const res = await fetch(`${API_PEDIDOS_CREAR}/${id}`, {
+  const res = await fetch(`${API_PEDIDOS_CREAR}/${id}`, {
       method: 'DELETE'
     });
     if (res.ok) {
@@ -75,8 +75,11 @@ window.eliminarPedido = async function (id) {
 document.addEventListener('DOMContentLoaded', obtenerPedidos);
 
 
+
+
+
 // API para productos
-const API_URL = 'https://caso-practico-final.onrender.com/api/productos';
+const API_URL = 'http://localhost:3000/api/productos';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
@@ -102,7 +105,7 @@ async function cargarProductos() {
         <td>${prod.categoria || ''}</td>
         <td>${prod.precio}</td>
         <td>${prod.stock}</td>
-        <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : ''}</td>
+        <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0,10) : ''}</td>
         <td>${prod.proveedor || ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
           <button onclick="editarProducto('${prod._id}')">✏️</button>
@@ -130,7 +133,6 @@ async function handleCrearProducto(e) {
     fecha_ingreso: form.fecha_ingreso.value,
     proveedor: form.proveedor.value.trim()
   };
-  // Validación frontend eliminada. El backend se encarga de validar los datos.
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
@@ -139,8 +141,8 @@ async function handleCrearProducto(e) {
     });
     if (res.ok) {
       form.reset();
-      alert('Producto creado correctamente');
-      cargarProductos();
+  alert('Producto creado correctamente');
+  cargarProductos();
     } else {
       const data = await res.json();
       let msg = 'Error al crear producto';
@@ -155,7 +157,7 @@ async function handleCrearProducto(e) {
 }
 
 // Eliminar producto
-window.eliminarProducto = async function (id) {
+window.eliminarProducto = async function(id) {
   if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
   try {
     const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
@@ -167,7 +169,7 @@ window.eliminarProducto = async function (id) {
 }
 
 // Editar producto
-window.editarProducto = async function (id) {
+window.editarProducto = async function(id) {
   try {
     const res = await fetch(`${API_URL}/${id}`);
     if (!res.ok) return alert('No se pudo obtener el producto');
@@ -180,10 +182,10 @@ window.editarProducto = async function (id) {
     form.categoria.value = prod.categoria || '';
     form.precio.value = prod.precio || '';
     form.stock.value = prod.stock || '';
-    form.fecha_ingreso.value = prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : '';
+    form.fecha_ingreso.value = prod.fecha_ingreso ? prod.fecha_ingreso.substring(0,10) : '';
     form.proveedor.value = prod.proveedor || '';
     modal.style.display = 'flex';
-    form.onsubmit = async function (e) {
+    form.onsubmit = async function(e) {
       e.preventDefault();
       const datos = {
         nombre: form.nombre.value.trim(),
