@@ -42,7 +42,7 @@ async function handleCrearCliente(e) {
   e.preventDefault();
   const form = e.target;
   // Limpiar errores previos
-  const fields = ['cedula','nombre','apellido','ciudad','email','direccion','telefono','fecha_nacimiento','passwordCliente'];
+  const fields = ['cedula', 'nombre', 'apellido', 'ciudad', 'email', 'direccion', 'telefono', 'fecha_nacimiento', 'passwordCliente'];
   fields.forEach(f => {
     const errSpan = form.querySelector(`.error-${f}`);
     if (errSpan) errSpan.textContent = '';
@@ -58,16 +58,7 @@ async function handleCrearCliente(e) {
     fecha_nacimiento: form.fecha_nacimiento.value,
     passwordCliente: form.passwordCliente.value.trim()
   };
-  // Validar con Zod
-  const result = clienteSchema.safeParse(cliente);
-  if (!result.success) {
-    // Mostrar errores debajo de cada campo
-    result.error.errors.forEach(e => {
-      const errSpan = form.querySelector(`.error-${e.path[0]}`);
-      if (errSpan) errSpan.textContent = e.message;
-    });
-    return;
-  }
+
   try {
     const res = await fetch(API_CLIENTES, {
       method: 'POST',
