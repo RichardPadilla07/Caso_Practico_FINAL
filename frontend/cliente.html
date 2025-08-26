@@ -440,6 +440,11 @@
 <script src="carrito/carrito.js"></script>
 <script src="pedidos/pedidos.js"></script>
 <script>
+  // Verificación de sesión de cliente
+  if (!localStorage.getItem('cedulaCliente')) {
+    window.location.href = 'index.html';
+  }
+
   // Carrusel de pedidos con flechas en ambas vistas
   document.addEventListener('DOMContentLoaded', function () {
     const btnIzq = document.getElementById('btn-carrusel-pedidos-izq');
