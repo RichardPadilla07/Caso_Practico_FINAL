@@ -65,3 +65,25 @@ export const remove = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+// Login de usuario
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const usuario = await Usuario.findOne({ email });
+    if (!usuario) {
+      return res.status(401).json({ message: 'Usuario no encontrado' });
+    }
+    if (usuario.password !== password) {
+      return res.status(401).json({ message: 'Contraseña incorrecta' });
+    }
+    return res.status(200).json({ message: 'Login exitoso', usuario });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error en el servidor', error });
+  }
+};

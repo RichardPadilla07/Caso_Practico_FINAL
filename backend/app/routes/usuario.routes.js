@@ -4,13 +4,14 @@
 
 // Importar las dependencias necesarias
 import { Router } from 'express';
-import { getAll, getById, create, update, remove } from '../controllers/usuario.controller.js';
+import { getAll, getById, create, update, remove, login } from '../controllers/usuario.controller.js';
 
 const router = Router();
 
 router.get('/', getAll);
 router.get('/:id', getById);
 router.post('/', create);
+router.post('/login', login);
 router.put('/:id', update);
 router.delete('/:id', remove);
 
