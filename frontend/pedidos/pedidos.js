@@ -13,6 +13,7 @@ function pintarCedulaCliente() {
     if (cedulaInput && cedula) {
       cedulaInput.value = cedula;
       cedulaInput.readOnly = true;
+    const BACKEND_URL = window.BACKEND_URL;
     } else if (cedulaInput) {
       cedulaInput.value = '';
     }
@@ -25,7 +26,8 @@ async function buscarProducto() {
   const codigo = document.getElementById('codigo_producto').value.trim();
   if (!codigo) return;
   try {
-    const res = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
+  const BACKEND_URL = window.BACKEND_URL;
+  const res = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
     if (!res.ok) throw new Error('Producto no encontrado');
     const producto = await res.json();
     mostrarDatosProducto(producto);
@@ -33,7 +35,6 @@ async function buscarProducto() {
     document.getElementById('productoMsg').textContent = 'Producto no encontrado';
     document.getElementById('productoMsg').style.display = 'block';
     document.getElementById('datosProducto').style.display = 'none';
-  }
 }
 
 
@@ -52,10 +53,10 @@ async function crearPedido(e) {
   e.preventDefault();
   const cedula = document.getElementById('cedula_cliente').value;
   const codigo = document.getElementById('codigo_producto').value;
-  const cantidad = document.getElementById('cantidadProducto').value;
   try {
     // Obtener producto para el código
-    const resProd = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
+      const BACKEND_URL = window.BACKEND_URL;
+      const resProd = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
     if (!resProd.ok) throw new Error('Producto no encontrado');
     const producto = await resProd.json();
     // Generar un código de pedido único como número
@@ -63,10 +64,10 @@ async function crearPedido(e) {
     const pedido = {
       codigo_pedido,
       cedula_cliente: cedula,
-      codigo_producto: producto.codigo,
       cantidad: cantidad
     };
-    const res = await fetch('http://localhost:3000/api/pedidos', {
+      // Usar BACKEND_URL ya declarado arriba
+      const res = await fetch(`${BACKEND_URL}/api/pedidos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(pedido)
@@ -77,17 +78,17 @@ async function crearPedido(e) {
     document.getElementById('codigo_producto').value = '';
     document.getElementById('cantidadProducto').value = 1;
     document.getElementById('datosProducto').style.display = 'none';
-    mostrarPedidosCliente();
-  } catch (err) {
-    alert('Error al crear pedido');
+      mostrarPedidosCliente();
+    } catch (err) {
+      alert('Error al crear pedido');
+    }
   }
 }
 
-// Mostrar pedidos del cliente
 async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
-    const res = await fetch(`http://localhost:3000/api/pedidos/cliente/${cedula}`);
+  const res = await fetch(`${BACKEND_URL}/api/pedidos/cliente/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener pedidos');
     const pedidos = await res.json();
     renderPedidosTabla(pedidos);

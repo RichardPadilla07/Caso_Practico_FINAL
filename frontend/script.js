@@ -43,7 +43,8 @@ async function handleAdminLogin(e) {
   }
   // Petición al backend
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios', {
+  const BACKEND_URL = window.BACKEND_URL;
+  const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
       method: 'GET'
     });
     const usuarios = await res.json();
@@ -72,7 +73,8 @@ async function handleAdminRegister(e) {
     return false;
   }
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios', {
+  const BACKEND_URL = window.BACKEND_URL;
+  const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, apellido, email, password })
@@ -98,7 +100,8 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-    const res = await fetch('http://localhost:3000/api/clientes', {
+  const BACKEND_URL = window.BACKEND_URL;
+  const res = await fetch(`${BACKEND_URL}/api/clientes`, {
       method: 'GET'
     });
     const clientes = await res.json();
@@ -131,7 +134,8 @@ async function handleClienteRegister(e) {
     return false;
   }
   try {
-    const res = await fetch('http://localhost:3000/api/clientes', {
+  const BACKEND_URL = window.BACKEND_URL;
+  const res = await fetch(`${BACKEND_URL}/api/clientes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente })
