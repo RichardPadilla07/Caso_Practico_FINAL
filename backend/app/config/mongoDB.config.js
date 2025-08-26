@@ -3,7 +3,7 @@
 
 // Configuración para MongoDB
 const config = {
-  MONGO_URI: "mongodb+srv://richardpadilla3rod:guyfCzwcc9bsDVrF@cluster0.9ekun.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  MONGO_URI: process.env.MONGO_URL
 };
 
 export default config;
