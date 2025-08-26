@@ -435,15 +435,13 @@
   </div>
 
 </body>
+
+<script src="script.js"></script>
 <script src="perfil/perfil.js"></script>
 <script src="listar/listar.js"></script>
 <script src="carrito/carrito.js"></script>
 <script src="pedidos/pedidos.js"></script>
 <script>
-  // Verificación de sesión de cliente
-  if (!localStorage.getItem('cedulaCliente')) {
-    window.location.href = 'index.html';
-  }
 
   // Carrusel de pedidos con flechas en ambas vistas
   document.addEventListener('DOMContentLoaded', function () {
