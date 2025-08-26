@@ -130,13 +130,7 @@ async function handleCrearProducto(e) {
     fecha_ingreso: form.fecha_ingreso.value,
     proveedor: form.proveedor.value.trim()
   };
-  // Validar con Zod
-  const result = productoSchema.safeParse(producto);
-  if (!result.success) {
-    const errors = result.error.errors.map(e => e.message).join('\n');
-    alert('Errores de validación:\n' + errors);
-    return;
-  }
+  // Validación frontend eliminada. El backend se encarga de validar los datos.
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
