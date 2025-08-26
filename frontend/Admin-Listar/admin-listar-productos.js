@@ -2,7 +2,8 @@
 // Aquí se definen funciones para el CRUD y visualización de productos.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 // CRUD de productos para el panel admin
-const API_URL = 'http://localhost:3000/api/productos';
+import { FRONTEND_URL } from '../config.js';
+const API_URL = FRONTEND_URL + '/api/productos';
 
 async function cargarProductos() {
   const tbody = document.getElementById('tabla-productos-body');

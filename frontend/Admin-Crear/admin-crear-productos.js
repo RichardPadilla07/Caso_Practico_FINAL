@@ -2,8 +2,9 @@
 // Aquí se definen funciones para el CRUD de productos y gestión de pedidos.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
+import { FRONTEND_URL } from '../config.js';
 // API para pedidos
-const API_PEDIDOS_CREAR = 'http://localhost:3000/api/pedidos';
+const API_PEDIDOS_CREAR = FRONTEND_URL + '/api/pedidos';
 
 // Obtener y mostrar pedidos como tarjetas
 async function obtenerPedidos() {
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', obtenerPedidos);
 
 
 // API para productos
-const API_URL = 'http://localhost:3000/api/productos';
+const API_URL = FRONTEND_URL + '/api/productos';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {

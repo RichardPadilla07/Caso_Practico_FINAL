@@ -2,8 +2,9 @@
 // Aquí se definen funciones para el CRUD de clientes.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
+import { FRONTEND_URL } from '../config.js';
 // API para clientes
-const API_CLIENTES = 'http://localhost:3000/api/clientes';
+const API_CLIENTES = FRONTEND_URL + '/api/clientes';
 
 // Cargar clientes
 async function cargarClientes() {
