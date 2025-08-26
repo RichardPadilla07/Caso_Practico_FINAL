@@ -4,25 +4,6 @@
 
 import Cliente from '../models/cliente.js';
 
-export const loginCliente = async (req, res) => {
-  const { cedula, passwordCliente } = req.body;
-  if (!cedula || !passwordCliente) {
-    return res.status(400).json({ error: 'Faltan datos' });
-  }
-  try {
-    const cliente = await Cliente.findOne({
-      cedula: cedula.toString().trim(),
-      passwordCliente: passwordCliente.trim()
-    });
-    if (!cliente) {
-      return res.status(401).json({ error: 'Credenciales incorrectas' });
-    }
-    res.json({ cedula: cliente.cedula, nombre: cliente.nombre, rol: 'cliente' });
-  } catch (err) {
-    res.status(500).json({ error: 'Error de servidor' });
-  }
-};
-
 // Obtener cliente por cédula
 export const getByCedula = async (req, res) => {
   try {

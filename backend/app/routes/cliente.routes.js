@@ -4,7 +4,7 @@
 
 // Importamos las dependecias necesarios 
 import { Router } from 'express';
-import { getByCedula, getAll, create, update, remove, loginCliente } from '../controllers/cliente.controller.js';
+import { getByCedula, getAll, create, update, remove } from '../controllers/cliente.controller.js';
 
 const router = Router();
 
@@ -13,6 +13,5 @@ router.get('/', getAll);
 router.post('/', create);
 router.put('/:cedula', update);
 router.delete('/:cedula', remove);
-router.post('/login', loginCliente);
 
 export default router;

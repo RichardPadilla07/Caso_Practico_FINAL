@@ -3,10 +3,8 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 
-import { BACKEND_URL } from '../config.js';
-import { FRONTEND_URL } from '../config.js';
 // API para pedidos
-const API_PEDIDOS = BACKEND_URL + '/api/pedidos';
+const API_PEDIDOS = 'http://localhost:3000/api/pedidos';
 
 async function obtenerPedidos() {
   try {

@@ -1,4 +1,3 @@
-import { BACKEND_URL } from './config.js';
 // Utilidades para mostrar/ocultar formularios.
 function hideAllForms() {
   document.getElementById('admin-login').classList.add('hidden');
@@ -6,33 +5,24 @@ function hideAllForms() {
   document.getElementById('cliente-login').classList.add('hidden');
   document.getElementById('cliente-register').classList.add('hidden');
 }
-
 function showAdminLogin() {
   hideAllForms();
   document.getElementById('role-select').style.display = 'none';
   document.getElementById('admin-login').classList.remove('hidden');
 }
-window.showAdminLogin = showAdminLogin;
-
 function showAdminRegister() {
   hideAllForms();
   document.getElementById('admin-register').classList.remove('hidden');
 }
-window.showAdminRegister = showAdminRegister;
-
 function showClienteLogin() {
   hideAllForms();
   document.getElementById('role-select').style.display = 'none';
   document.getElementById('cliente-login').classList.remove('hidden');
 }
-window.showClienteLogin = showClienteLogin;
-
 function showClienteRegister() {
   hideAllForms();
   document.getElementById('cliente-register').classList.remove('hidden');
 }
-window.showClienteRegister = showClienteRegister;
-
 // Notificaciones
 function showNotification(id, message, type) {
   const notif = document.getElementById(id);
@@ -53,18 +43,18 @@ async function handleAdminLogin(e) {
   }
   // Petición al backend
   try {
-    const res = await fetch(`${BACKEND_URL}/api/usuarios/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+    const res = await fetch('http://localhost:3000/api/usuarios', {
+      method: 'GET'
     });
-    const data = await res.json();
-    if (res.ok && data.rol === 'admin') {
+    const usuarios = await res.json();
+    const user = usuarios.find(u => u.email === email && u.password === password);
+    if (user) {
       showNotification('admin-login-notif', 'Login exitoso. Redirigiendo...', 'success');
-      localStorage.setItem('adminId', data._id);
+      // Guardar el _id real del usuario admin en localStorage
+      localStorage.setItem('adminId', user._id);
       setTimeout(() => { window.location.href = 'admin.html'; }, 1500);
     } else {
-      showNotification('admin-login-notif', data.error || 'Credenciales incorrectas.', 'error');
+      showNotification('admin-login-notif', 'Credenciales incorrectas.', 'error');
     }
   } catch (err) {
     showNotification('admin-login-notif', 'Error de conexión.', 'error');
@@ -82,7 +72,7 @@ async function handleAdminRegister(e) {
     return false;
   }
   try {
-    const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
+    const res = await fetch('http://localhost:3000/api/usuarios', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, apellido, email, password })
@@ -99,7 +89,6 @@ async function handleAdminRegister(e) {
   }
   return false;
 }
-window.handleAdminRegister = handleAdminRegister;
 async function handleClienteLogin(e) {
   e.preventDefault();
   const cedula = document.getElementById('cliente-cedula').value.trim();
@@ -109,18 +98,17 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-    const res = await fetch(`${BACKEND_URL}/api/clientes/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cedula, passwordCliente })
+    const res = await fetch('http://localhost:3000/api/clientes', {
+      method: 'GET'
     });
-    const data = await res.json();
-    if (res.ok && data.rol === 'cliente') {
+    const clientes = await res.json();
+    const cliente = clientes.find(c => c.cedula == cedula && c.passwordCliente === passwordCliente);
+    if (cliente) {
       showNotification('cliente-login-notif', 'Login exitoso. Redirigiendo...', 'success');
-      localStorage.setItem('cedulaCliente', data.cedula);
+      localStorage.setItem('cedulaCliente', cliente.cedula);
       setTimeout(() => { window.location.href = 'cliente.html'; }, 1500);
     } else {
-      showNotification('cliente-login-notif', data.error || 'Credenciales incorrectas.', 'error');
+      showNotification('cliente-login-notif', 'Credenciales incorrectas.', 'error');
     }
   } catch (err) {
     showNotification('cliente-login-notif', 'Error de conexión.', 'error');
@@ -143,7 +131,7 @@ async function handleClienteRegister(e) {
     return false;
   }
   try {
-    const res = await fetch(`${BACKEND_URL}/api/clientes`, {
+    const res = await fetch('http://localhost:3000/api/clientes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente })
@@ -157,7 +145,7 @@ async function handleClienteRegister(e) {
         const data = await res.json();
         if (typeof data.error === 'string') errorMsg = data.error;
         else if (typeof data.error === 'object' && data.error.message) errorMsg = data.error.message;
-      } catch (e) { }
+      } catch (e) {}
       showNotification('cliente-register-notif', errorMsg, 'error');
     }
   } catch (err) {
@@ -165,7 +153,6 @@ async function handleClienteRegister(e) {
   }
   return false;
 }
-window.handleClienteRegister = handleClienteRegister;
 
 
 

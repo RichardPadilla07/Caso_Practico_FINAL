@@ -1,4 +1,3 @@
-import { BACKEND_URL } from './config.js';
 // Script principal para la navegación y gestión de secciones en el panel de administración.
 // Aquí se definen funciones para mostrar secciones y cargar datos en el panel admin.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.

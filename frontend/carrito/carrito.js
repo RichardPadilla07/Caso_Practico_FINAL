@@ -1,4 +1,3 @@
-const FRONTEND_URL = window.FRONTEND_URL;
 // Script para la gestión del carrito de compras del cliente.
 // Aquí se definen funciones para mostrar, actualizar y eliminar productos del carrito.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
@@ -31,7 +30,7 @@ async function mostrarCarritoCliente() {
   }
   if (!cedula) return;
   try {
-    const res = await fetch(`${FRONTEND_URL}/api/carrito/${cedula}`);
+    const res = await fetch(`http://localhost:3000/api/carrito/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener carrito');
     const productos = await res.json();
     renderCarrito(productos);
@@ -88,7 +87,7 @@ async function actualizarCantidadCarrito(id) {
   }
   try {
     // Actualizar cantidad en el carrito
-    const res = await fetch(`${FRONTEND_URL}/api/carrito/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/carrito/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cantidad })
@@ -105,7 +104,7 @@ async function actualizarCantidadCarrito(id) {
 async function eliminarDelCarrito(id) {
   if (!confirm('¿Eliminar este producto del carrito?')) return;
   try {
-    const res = await fetch(`${FRONTEND_URL}/api/carrito/${id}`, { method: 'DELETE' });
+    const res = await fetch(`http://localhost:3000/api/carrito/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Error al eliminar');
     window.alert('Producto eliminado');
     mostrarCarritoCliente();

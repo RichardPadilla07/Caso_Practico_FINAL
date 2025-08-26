@@ -2,7 +2,6 @@
 // Aquí se definen funciones para crear, buscar y mostrar pedidos.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
-import { BACKEND_URL } from '../config.js';
 // Pintar cédula del cliente
 function pintarCedulaCliente() {
   setTimeout(() => {
@@ -26,7 +25,7 @@ async function buscarProducto() {
   const codigo = document.getElementById('codigo_producto').value.trim();
   if (!codigo) return;
   try {
-    const res = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
+    const res = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
     if (!res.ok) throw new Error('Producto no encontrado');
     const producto = await res.json();
     mostrarDatosProducto(producto);
@@ -56,7 +55,7 @@ async function crearPedido(e) {
   const cantidad = document.getElementById('cantidadProducto').value;
   try {
     // Obtener producto para el código
-    const resProd = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
+    const resProd = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
     if (!resProd.ok) throw new Error('Producto no encontrado');
     const producto = await resProd.json();
     // Generar un código de pedido único como número
@@ -64,9 +63,10 @@ async function crearPedido(e) {
     const pedido = {
       codigo_pedido,
       cedula_cliente: cedula,
+      codigo_producto: producto.codigo,
       cantidad: cantidad
     };
-    const res = await fetch(`${BACKEND_URL}/api/pedidos`, {
+    const res = await fetch('http://localhost:3000/api/pedidos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(pedido)
@@ -82,12 +82,12 @@ async function crearPedido(e) {
     alert('Error al crear pedido');
   }
 }
-// ...el resto del código permanece igual...
 
+// Mostrar pedidos del cliente
 async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
-    const res = await fetch(`${BACKEND_URL}/api/pedidos/cliente/${cedula}`);
+    const res = await fetch(`http://localhost:3000/api/pedidos/cliente/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener pedidos');
     const pedidos = await res.json();
     renderPedidosTabla(pedidos);

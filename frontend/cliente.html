@@ -5,12 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Cliente</title>
-  <script>
-    // Validación de sesión cliente
-    if (!localStorage.getItem('cedulaCliente')) {
-      window.location.href = 'index.html'; // Redirige a selección de rol
-    }
-  </script>
   <style>
     * {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -441,14 +435,11 @@
   </div>
 
 </body>
-
-<script src="script.js"></script>
 <script src="perfil/perfil.js"></script>
 <script src="listar/listar.js"></script>
 <script src="carrito/carrito.js"></script>
 <script src="pedidos/pedidos.js"></script>
 <script>
-
   // Carrusel de pedidos con flechas en ambas vistas
   document.addEventListener('DOMContentLoaded', function () {
     const btnIzq = document.getElementById('btn-carrusel-pedidos-izq');

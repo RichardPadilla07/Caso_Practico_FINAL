@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
 import "./config/mongoDB.js";
 import cors from "cors";
@@ -13,13 +11,9 @@ import carritoRoutes from "./routes/carrito.routes.js";
 const app = express();
 
 const corsOptions = {
-  origin: [
-    "https://casoproductosfrontend.vercel.app",
-    "https://caso-practico-final-1.onrender.com"
-  ],
+  origin: ["http://127.0.0.1:5500", "http://localhost:3000"],
   credentials: true
 };
-
 app.use(cors(corsOptions));
 
 // Servir archivos estáticos del frontend

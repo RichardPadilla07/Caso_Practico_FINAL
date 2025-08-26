@@ -3,25 +3,6 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 import Usuario from '../models/usuario.js';
 
-export const loginUsuario = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Faltan datos' });
-  }
-  try {
-    const user = await Usuario.findOne({
-      email: email.trim().toLowerCase(),
-      password: password.trim()
-    });
-    if (!user) {
-      return res.status(401).json({ error: 'Credenciales incorrectas' });
-    }
-    res.json({ _id: user._id, email: user.email, rol: 'admin' });
-  } catch (err) {
-    res.status(500).json({ error: 'Error de servidor' });
-  }
-};
-
 // Listar todos los usuarios
 export const getAll = async (req, res) => {
   try {
