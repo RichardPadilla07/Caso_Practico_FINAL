@@ -8,19 +8,34 @@ const API_CLIENTES = 'https://caso-practico-final.onrender.com/api/clientes';
 
 // Esquema de validación Zod para cliente
 const clienteSchema = z.object({
-  cedula: z.string().min(8, 'Cédula debe tener al menos 8 caracteres'),
-  nombre: z.string().min(2, 'Nombre requerido'),
-  apellido: z.string().min(2, 'Apellido requerido'),
-  ciudad: z.string().min(2, 'Ciudad requerida'),
+  cedula: z.string()
+    .min(8, 'Cédula debe tener al menos 8 caracteres')
+    .regex(/^\d+$/, 'La cédula solo debe contener números'),
+  nombre: z.string()
+    .min(2, 'Nombre requerido')
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'El nombre solo debe contener letras'),
+  apellido: z.string()
+    .min(2, 'Apellido requerido')
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'El apellido solo debe contener letras'),
+  ciudad: z.string()
+    .min(2, 'Ciudad requerida')
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'La ciudad solo debe contener letras'),
   email: z.string()
     .regex(/^[a-z0-9._%+-]+@gmail\.com$/, 'Solo se permite correo @gmail.com en minúsculas'),
-  direccion: z.string().optional(),
-  telefono: z.string().min(7, 'Teléfono inválido').optional(),
+  direccion: z.string()
+    .regex(/^[^\d]*$/, 'La dirección no debe contener números')
+    .optional(),
+  telefono: z.string()
+    .min(7, 'Teléfono inválido')
+    .regex(/^\d+$/, 'El teléfono solo debe contener números')
+    .optional(),
   fecha_nacimiento: z.string().min(8, 'Fecha requerida'),
   passwordCliente: z.string()
     .min(8, 'Contraseña mínimo 8 caracteres')
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/, 'La contraseña debe tener mayúsculas, minúsculas, números y símbolos')
 });
+
+
 
 
 
