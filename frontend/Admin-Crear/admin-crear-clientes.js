@@ -76,6 +76,12 @@ async function cargarClientes() {
 async function handleCrearCliente(e) {
   e.preventDefault();
   const form = e.target;
+  // Limpiar errores previos
+  const fields = ['cedula','nombre','apellido','ciudad','email','direccion','telefono','fecha_nacimiento','passwordCliente'];
+  fields.forEach(f => {
+    const errSpan = form.querySelector(`.error-${f}`);
+    if (errSpan) errSpan.textContent = '';
+  });
   const cliente = {
     cedula: form.cedula.value.trim(),
     nombre: form.nombre.value.trim(),
@@ -90,8 +96,11 @@ async function handleCrearCliente(e) {
   // Validar con Zod
   const result = clienteSchema.safeParse(cliente);
   if (!result.success) {
-    const errors = result.error.errors.map(e => e.message).join('\n');
-    alert('Errores de validación:\n' + errors);
+    // Mostrar errores debajo de cada campo
+    result.error.errors.forEach(e => {
+      const errSpan = form.querySelector(`.error-${e.path[0]}`);
+      if (errSpan) errSpan.textContent = e.message;
+    });
     return;
   }
   try {
