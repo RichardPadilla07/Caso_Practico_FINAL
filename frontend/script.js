@@ -99,6 +99,7 @@ async function handleAdminRegister(e) {
   }
   return false;
 }
+window.handleAdminRegister = handleAdminRegister;
 async function handleClienteLogin(e) {
   e.preventDefault();
   const cedula = document.getElementById('cliente-cedula').value.trim();
@@ -163,6 +164,7 @@ async function handleClienteRegister(e) {
   }
   return false;
 }
+window.handleClienteRegister = handleClienteRegister;
 
 
 

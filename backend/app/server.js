@@ -14,9 +14,13 @@ import carritoRoutes from "./routes/carrito.routes.js";
 const app = express();
 
 const corsOptions = {
-  origin: ["http://127.0.0.1:5500", "http://localhost:3000"],
+  origin: [
+    "https://casoproductosfrontend.vercel.app",
+    "https://caso-practico-final-1.onrender.com"
+  ],
   credentials: true
 };
+
 app.use(cors(corsOptions));
 
 // Servir archivos estáticos del frontend
