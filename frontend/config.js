@@ -1,3 +1,2 @@
-// Archivo para obtener la URL del backend desde el .env del backend
-window.FRONTEND_URL = "https://casoproductosfrontend.vercel.app/";
-window.BACKEND_URL = "http://localhost:3000";
+// Configuración global para obtener la URL del backend desde Vite
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

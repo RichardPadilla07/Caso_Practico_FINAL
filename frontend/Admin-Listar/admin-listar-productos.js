@@ -3,7 +3,8 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 // CRUD de productos para el panel admin
 import { FRONTEND_URL } from '../config.js';
-const API_URL = FRONTEND_URL + '/api/productos';
+import { BACKEND_URL } from '../config.js';
+const API_URL = BACKEND_URL + '/api/productos';
 
 async function cargarProductos() {
   const tbody = document.getElementById('tabla-productos-body');

@@ -2,6 +2,7 @@
 // Aquí se definen funciones para crear, buscar y mostrar pedidos.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
+import { BACKEND_URL } from '../config.js';
 // Pintar cédula del cliente
 function pintarCedulaCliente() {
   setTimeout(() => {
@@ -13,7 +14,6 @@ function pintarCedulaCliente() {
     if (cedulaInput && cedula) {
       cedulaInput.value = cedula;
       cedulaInput.readOnly = true;
-    const BACKEND_URL = window.BACKEND_URL;
     } else if (cedulaInput) {
       cedulaInput.value = '';
     }
@@ -26,8 +26,7 @@ async function buscarProducto() {
   const codigo = document.getElementById('codigo_producto').value.trim();
   if (!codigo) return;
   try {
-  const BACKEND_URL = window.BACKEND_URL;
-  const res = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
+    const res = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
     if (!res.ok) throw new Error('Producto no encontrado');
     const producto = await res.json();
     mostrarDatosProducto(producto);
@@ -35,6 +34,7 @@ async function buscarProducto() {
     document.getElementById('productoMsg').textContent = 'Producto no encontrado';
     document.getElementById('productoMsg').style.display = 'block';
     document.getElementById('datosProducto').style.display = 'none';
+  }
 }
 
 
@@ -53,10 +53,10 @@ async function crearPedido(e) {
   e.preventDefault();
   const cedula = document.getElementById('cedula_cliente').value;
   const codigo = document.getElementById('codigo_producto').value;
+  const cantidad = document.getElementById('cantidadProducto').value;
   try {
     // Obtener producto para el código
-      const BACKEND_URL = window.BACKEND_URL;
-      const resProd = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
+    const resProd = await fetch(`${BACKEND_URL}/api/productos/codigo/${codigo}`);
     if (!resProd.ok) throw new Error('Producto no encontrado');
     const producto = await resProd.json();
     // Generar un código de pedido único como número
@@ -66,8 +66,7 @@ async function crearPedido(e) {
       cedula_cliente: cedula,
       cantidad: cantidad
     };
-      // Usar BACKEND_URL ya declarado arriba
-      const res = await fetch(`${BACKEND_URL}/api/pedidos`, {
+    const res = await fetch(`${BACKEND_URL}/api/pedidos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(pedido)
@@ -78,17 +77,17 @@ async function crearPedido(e) {
     document.getElementById('codigo_producto').value = '';
     document.getElementById('cantidadProducto').value = 1;
     document.getElementById('datosProducto').style.display = 'none';
-      mostrarPedidosCliente();
-    } catch (err) {
-      alert('Error al crear pedido');
-    }
+    mostrarPedidosCliente();
+  } catch (err) {
+    alert('Error al crear pedido');
   }
 }
+// ...el resto del código permanece igual...
 
 async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
-  const res = await fetch(`${BACKEND_URL}/api/pedidos/cliente/${cedula}`);
+    const res = await fetch(`${BACKEND_URL}/api/pedidos/cliente/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener pedidos');
     const pedidos = await res.json();
     renderPedidosTabla(pedidos);

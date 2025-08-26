@@ -1,3 +1,4 @@
+import { BACKEND_URL } from './config.js';
 // Utilidades para mostrar/ocultar formularios.
 function hideAllForms() {
   document.getElementById('admin-login').classList.add('hidden');
@@ -43,7 +44,6 @@ async function handleAdminLogin(e) {
   }
   // Petición al backend
   try {
-  const BACKEND_URL = window.BACKEND_URL;
   const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
       method: 'GET'
     });
@@ -73,7 +73,6 @@ async function handleAdminRegister(e) {
     return false;
   }
   try {
-  const BACKEND_URL = window.BACKEND_URL;
   const res = await fetch(`${BACKEND_URL}/api/usuarios`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -100,7 +99,6 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-  const BACKEND_URL = window.BACKEND_URL;
   const res = await fetch(`${BACKEND_URL}/api/clientes`, {
       method: 'GET'
     });
@@ -134,7 +132,6 @@ async function handleClienteRegister(e) {
     return false;
   }
   try {
-  const BACKEND_URL = window.BACKEND_URL;
   const res = await fetch(`${BACKEND_URL}/api/clientes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

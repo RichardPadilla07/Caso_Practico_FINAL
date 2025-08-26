@@ -4,7 +4,8 @@
 
 import { FRONTEND_URL } from '../config.js';
 // API para clientes
-const API_CLIENTES = FRONTEND_URL + '/api/clientes';
+import { BACKEND_URL } from '../config.js';
+const API_CLIENTES = BACKEND_URL + '/api/clientes';
 
 // Cargar clientes
 async function cargarClientes() {
