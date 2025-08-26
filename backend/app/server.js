@@ -10,16 +10,22 @@ import carritoRoutes from "./routes/carrito.routes.js";
 
 const app = express();
 
-const allowedOrigins = [
-  "http://127.0.0.1:5500",
-  "http://localhost:3000",
-  "https://casoproductosfrontend.netlify.app"
-];
-app.use(cors({
-  origin: allowedOrigins,
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://127.0.0.1:5500",
+      "http://localhost:3000",
+      "https://casoproductosfrontend.netlify.app"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
-}));
-app.options('*', cors());
+};
+app.use(cors(corsOptions));
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(path.resolve(), '../../frontend')));
