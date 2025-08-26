@@ -5,6 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Admin</title>
+  <script>
+    // Validación de sesión admin
+    if (!localStorage.getItem('adminId')) {
+      window.location.href = 'index.html'; // Redirige a selección de rol
+    }
+  </script>
   <style>
     * {
       font-family: 'Segoe UI', Arial, sans-serif;
