@@ -10,11 +10,15 @@ import carritoRoutes from "./routes/carrito.routes.js";
 
 const app = express();
 
-const corsOptions = {
-  origin: ["http://127.0.0.1:5500", "http://localhost:3000"],
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:3000"
+];
+app.use(cors({
+  origin: allowedOrigins,
   credentials: true
-};
-app.use(cors(corsOptions));
+}));
+app.options('*', cors());
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(path.resolve(), '../../frontend')));
