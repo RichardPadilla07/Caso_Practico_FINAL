@@ -100,10 +100,10 @@ async function mostrarPedidosCliente() {
 function renderPedidosTabla(pedidos) {
   const tbody = document.querySelector('#tablaPedidos tbody');
   tbody.innerHTML = '';
-  pedidos.forEach(ped => {
+  pedidos.forEach((ped, idx) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${ped._id}</td>
+      <td>${idx + 1}</td>
       <td>${ped.codigo_pedido || ''}</td>
       <td>${ped.cedula_cliente}</td>
       <td>${ped.codigo_producto || ''}</td>
