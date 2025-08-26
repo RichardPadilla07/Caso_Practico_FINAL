@@ -3,7 +3,27 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para clientes
+import { z } from "zod";
 const API_CLIENTES = 'https://caso-practico-final.onrender.com/api/clientes';
+
+// Esquema de validación Zod para cliente
+const clienteSchema = z.object({
+  cedula: z.string().min(8, 'Cédula debe tener al menos 8 caracteres'),
+  nombre: z.string().min(2, 'Nombre requerido'),
+  apellido: z.string().min(2, 'Apellido requerido'),
+  ciudad: z.string().min(2, 'Ciudad requerida'),
+  email: z.string()
+    .regex(/^[a-z0-9._%+-]+@gmail\.com$/, 'Solo se permite correo @gmail.com en minúsculas'),
+  direccion: z.string().optional(),
+  telefono: z.string().min(7, 'Teléfono inválido').optional(),
+  fecha_nacimiento: z.string().min(8, 'Fecha requerida'),
+  passwordCliente: z.string()
+    .min(8, 'Contraseña mínimo 8 caracteres')
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/, 'La contraseña debe tener mayúsculas, minúsculas, números y símbolos')
+});
+
+
+
 
 // Cargar clientes
 async function cargarClientes() {
@@ -24,7 +44,7 @@ async function cargarClientes() {
         <td>${cli.email}</td>
         <td>${cli.direccion || ''}</td>
         <td>${cli.telefono || ''}</td>
-        <td>${cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0,10) : ''}</td>
+        <td>${cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0, 10) : ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
           <button onclick="editarCliente('${cli.cedula}')">✏️</button>
           <button onclick="eliminarCliente('${cli.cedula}')">🗑️</button>
@@ -52,6 +72,13 @@ async function handleCrearCliente(e) {
     fecha_nacimiento: form.fecha_nacimiento.value,
     passwordCliente: form.passwordCliente.value.trim()
   };
+  // Validar con Zod
+  const result = clienteSchema.safeParse(cliente);
+  if (!result.success) {
+    const errors = result.error.errors.map(e => e.message).join('\n');
+    alert('Errores de validación:\n' + errors);
+    return;
+  }
   try {
     const res = await fetch(API_CLIENTES, {
       method: 'POST',
@@ -60,8 +87,8 @@ async function handleCrearCliente(e) {
     });
     if (res.ok) {
       form.reset();
-  alert('Cliente creado correctamente');
-  cargarClientes();
+      alert('Cliente creado correctamente');
+      cargarClientes();
     } else {
       const data = await res.json();
       alert(data.error || 'Error al crear cliente');
@@ -72,7 +99,7 @@ async function handleCrearCliente(e) {
 }
 
 // Eliminar cliente
-window.eliminarCliente = async function(cedula) {
+window.eliminarCliente = async function (cedula) {
   if (!confirm('¿Seguro que deseas eliminar este cliente?')) return;
   try {
     const res = await fetch(`${API_CLIENTES}/${cedula}`, { method: 'DELETE' });
@@ -84,7 +111,7 @@ window.eliminarCliente = async function(cedula) {
 }
 
 // Editar cliente
-window.editarCliente = async function(cedula) {
+window.editarCliente = async function (cedula) {
   try {
     const res = await fetch(`${API_CLIENTES}/${cedula}`);
     if (!res.ok) return alert('No se pudo obtener el cliente');
@@ -98,10 +125,10 @@ window.editarCliente = async function(cedula) {
     form.email.value = cli.email || '';
     form.direccion.value = cli.direccion || '';
     form.telefono.value = cli.telefono || '';
-    form.fecha_nacimiento.value = cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0,10) : '';
+    form.fecha_nacimiento.value = cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0, 10) : '';
     form.passwordCliente.value = cli.passwordCliente || '';
     modal.style.display = 'flex';
-    form.onsubmit = async function(e) {
+    form.onsubmit = async function (e) {
       e.preventDefault();
       const datos = {
         cedula: form.cedula.value.trim(),
