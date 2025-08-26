@@ -10,6 +10,7 @@ import carritoRoutes from "./routes/carrito.routes.js";
 
 const app = express();
 
+// 1. Definir corsOptions antes de usarlo
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
@@ -25,19 +26,21 @@ const corsOptions = {
   },
   credentials: true
 };
+
+// 2. Usar CORS antes de cualquier otro middleware o ruta
 app.use(cors(corsOptions));
 
-// Servir archivos estáticos del frontend
+// 3. Luego el resto de middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// 4. Archivos estáticos y rutas
 app.use(express.static(path.join(path.resolve(), '../../frontend')));
 
 // Redirigir todas las rutas que no sean API al index.html del frontend
 app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(path.resolve(), '../../frontend/index.html'));
 });
-
-// Esto es para manejar las solicitudes JSON y URL-encoded
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Ruta de inicio
 app.get("/", (req, res) => {
