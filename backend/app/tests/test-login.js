@@ -9,8 +9,8 @@ export let options = {
 export default function () {
   const url = 'https://caso-practico-final.onrender.com/api/usuarios/login'; // URL de backend en la nube
   const payload = JSON.stringify({
-    email: 'richardpadilla2dod@gmail.com', // Cambia por un usuario válido en tu BD
-    password: '222'    // Cambia por la contraseña válida
+    email: 'richardpadilla2dod@gmail.com',
+    password: '222'
   });
 
   const params = {
