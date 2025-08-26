@@ -10,7 +10,10 @@ export const loginCliente = async (req, res) => {
     return res.status(400).json({ error: 'Faltan datos' });
   }
   try {
-    const cliente = await Cliente.findOne({ cedula, passwordCliente });
+    const cliente = await Cliente.findOne({
+      cedula: cedula.toString().trim(),
+      passwordCliente: passwordCliente.trim()
+    });
     if (!cliente) {
       return res.status(401).json({ error: 'Credenciales incorrectas' });
     }

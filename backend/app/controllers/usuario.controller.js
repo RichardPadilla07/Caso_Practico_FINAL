@@ -9,7 +9,10 @@ export const loginUsuario = async (req, res) => {
     return res.status(400).json({ error: 'Faltan datos' });
   }
   try {
-    const user = await Usuario.findOne({ email: email.trim().toLowerCase(), password });
+    const user = await Usuario.findOne({
+      email: email.trim().toLowerCase(),
+      password: password.trim()
+    });
     if (!user) {
       return res.status(401).json({ error: 'Credenciales incorrectas' });
     }
