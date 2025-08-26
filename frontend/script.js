@@ -11,6 +11,7 @@ function showAdminLogin() {
   document.getElementById('role-select').style.display = 'none';
   document.getElementById('admin-login').classList.remove('hidden');
 }
+window.showAdminLogin = showAdminLogin;
 function showAdminRegister() {
   hideAllForms();
   document.getElementById('admin-register').classList.remove('hidden');
@@ -20,6 +21,7 @@ function showClienteLogin() {
   document.getElementById('role-select').style.display = 'none';
   document.getElementById('cliente-login').classList.remove('hidden');
 }
+window.showClienteLogin = showClienteLogin;
 function showClienteRegister() {
   hideAllForms();
   document.getElementById('cliente-register').classList.remove('hidden');
