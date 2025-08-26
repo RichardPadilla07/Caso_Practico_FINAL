@@ -57,7 +57,7 @@ async function handleAdminLogin(e) {
       method: 'GET'
     });
     const usuarios = await res.json();
-    const user = usuarios.find(u => u.email === email && u.password === password);
+          const user = usuarios.find(u => u.email.trim().toLowerCase() === email.trim().toLowerCase() && u.password === password);
     if (user) {
       showNotification('admin-login-notif', 'Login exitoso. Redirigiendo...', 'success');
       // Guardar el _id real del usuario admin en localStorage
@@ -113,7 +113,7 @@ async function handleClienteLogin(e) {
       method: 'GET'
     });
     const clientes = await res.json();
-    const cliente = clientes.find(c => c.cedula == cedula && c.passwordCliente === passwordCliente);
+          const cliente = clientes.find(c => c.cedula === cedula && c.passwordCliente === passwordCliente);
     if (cliente) {
       showNotification('cliente-login-notif', 'Login exitoso. Redirigiendo...', 'success');
       localStorage.setItem('cedulaCliente', cliente.cedula);
