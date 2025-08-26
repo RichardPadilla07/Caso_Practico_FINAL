@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', obtenerPedidos);
 
 
 // API para productos
-const API_URL = 'http://localhost:3000/api/productos';
+const API_URL = 'https://caso-practico-final.onrender.com/api/productos';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
