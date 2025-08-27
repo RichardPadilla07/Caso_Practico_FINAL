@@ -51,12 +51,12 @@ function renderCarrito(productos) {
     return;
   }
   vacio.style.display = 'none';
-  productos.forEach(item => {
+  productos.forEach((item, idx) => {
     const prod = item.id_producto || {};
     const card = document.createElement('div');
     card.style = 'background:#f3f3f3;border-radius:16px;box-shadow:0 2px 8px rgba(106,17,203,0.08);padding:24px 18px;min-width:260px;max-width:320px;display:flex;flex-direction:column;align-items:flex-start;position:relative;margin-bottom:16px;';
     card.innerHTML = `
-      <div style="font-size:16px;color:#888;margin-bottom:4px;">ID Carrito: <strong>${item._id}</strong></div>
+      <div style="font-size:16px;color:#888;margin-bottom:4px;">ID Carrito: <strong>${idx + 1}</strong></div>
       <div style="font-size:20px;font-weight:bold;color:#2575fc;">${prod.nombre || ''}</div>
       <div style="margin-bottom:8px;color:#444;">Categoría: <strong>${prod.categoria || ''}</strong></div>
       <div style="margin-bottom:8px;color:#444;">Stock: <strong>${prod.stock ?? ''}</strong></div>
