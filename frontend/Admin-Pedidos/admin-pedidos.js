@@ -21,25 +21,31 @@ function mostrarPedidos(pedidos) {
   const container = document.getElementById('pedidos-container');
   if (!container) return;
   container.innerHTML = '';
-  pedidos.forEach(pedido => {
-    const card = document.createElement('div');
-    card.className = 'pedido-tarjeta';
-    card.style = 'background:#f3f3f3;border-radius:16px;box-shadow:0 2px 8px rgba(106,17,203,0.08);padding:24px 18px;min-width:260px;max-width:320px;display:flex;flex-direction:column;align-items:flex-start;position:relative;margin-bottom:16px;';
-    card.innerHTML = `
-      <div style="font-size:16px;color:#888;margin-bottom:4px;">ID Pedido: <strong>${pedido.id ?? ''}</strong></div>
-      <div style="font-size:20px;font-weight:bold;color:#2575fc;">Pedido #${pedido.codigo_pedido ?? ''}</div>
-      <div style="margin-bottom:8px;color:#444;">Cliente: <strong>${pedido.cedula_cliente ?? ''}</strong></div>
-      <div style="margin-bottom:8px;color:#444;">Producto: <strong>${pedido.codigo_producto ?? ''}</strong></div>
-      <div style="margin-bottom:8px;color:#444;">Cantidad: <strong>${pedido.cantidad ?? ''}</strong></div>
-      <div style="margin-bottom:8px;color:#444;">Estado: <span id="estado-${pedido._id}" style="font-weight:bold;">${pedido.estado || 'pendiente'}</span></div>
-      <div style="display:flex;gap:10px;">
-        <button style='background:#2575fc;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "aceptado")'>Aceptar</button>
-        <button style='background:#ff9800;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "no disponible")'>Rechazar</button>
-        <button style='background:#d32f2f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "eliminado")'>Eliminar</button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+  for (let i = 0; i < pedidos.length; i += 2) {
+    const row = document.createElement('div');
+    row.style = 'display:flex;gap:32px;margin-bottom:24px;';
+    for (let j = i; j < i + 2 && j < pedidos.length; j++) {
+      const pedido = pedidos[j];
+      const card = document.createElement('div');
+      card.className = 'pedido-tarjeta';
+      card.style = 'background:#f3f3f3;border-radius:16px;box-shadow:0 2px 8px rgba(106,17,203,0.08);padding:24px 18px;min-width:260px;max-width:320px;display:flex;flex-direction:column;align-items:flex-start;position:relative;';
+      card.innerHTML = `
+        <div style="font-size:16px;color:#888;margin-bottom:4px;">ID Pedido: <strong>${pedido.id ?? ''}</strong></div>
+        <div style="font-size:20px;font-weight:bold;color:#2575fc;">Pedido #${pedido.codigo_pedido ?? ''}</div>
+        <div style="margin-bottom:8px;color:#444;">Cliente: <strong>${pedido.cedula_cliente ?? ''}</strong></div>
+        <div style="margin-bottom:8px;color:#444;">Producto: <strong>${pedido.codigo_producto ?? ''}</strong></div>
+        <div style="margin-bottom:8px;color:#444;">Cantidad: <strong>${pedido.cantidad ?? ''}</strong></div>
+        <div style="margin-bottom:8px;color:#444;">Estado: <span id="estado-${pedido._id}" style="font-weight:bold;">${pedido.estado || 'pendiente'}</span></div>
+        <div style="display:flex;gap:10px;">
+          <button style='background:#2575fc;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "aceptado")'>Aceptar</button>
+          <button style='background:#ff9800;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "no disponible")'>Rechazar</button>
+          <button style='background:#d32f2f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:bold;cursor:pointer;' onclick='cambiarEstadoPedido("${pedido._id}", "eliminado")'>Eliminar</button>
+        </div>
+      `;
+      row.appendChild(card);
+    }
+    container.appendChild(row);
+  }
 }
 
 // Cambiar estado de un pedido (NO FUNCIONO AUN LO DE ADMIN DE MODULO PEDIDOS)
